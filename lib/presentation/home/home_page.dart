@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:softales/presentation/home/collection/collection_page.dart';
+import 'package:softales/presentation/tales/tales_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,37 +12,55 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-            title: Image.asset("assets/LogoHeader.png",
-                width: MediaQuery.of(context).size.width * 0.4),
+            title: Image.asset("assets/images/Logo.png",
+                width: MediaQuery.of(context).size.width * 0.1),
             backgroundColor: Colors.blue.shade500,
             actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.star),
-                color: Colors.yellow,
-                tooltip: 'Trofeos',
-                onPressed: () {},
+              InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 1),
+                  child: Image.asset("assets/images/profile-circle.png",
+                      width: MediaQuery.of(context).size.width * 0.1),
+                ),
+                onTap: () {},
               ),
-              IconButton(
-                icon: const Icon(Icons.lens_rounded),
-                color: Colors.red,
-                tooltip: 'Usuario',
-                onPressed: () {},
+              InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 5),
+                  child: Image.asset("assets/images/Logout.png",
+                      width: MediaQuery.of(context).size.width * 0.1),
+                ),
+                onTap: () {},
               ),
             ],
-            bottom: const TabBar(tabs: <Widget>[
+            bottom: TabBar(tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.gps_fixed_outlined),
-                text: 'Desafios',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.home),
+                    Text(
+                      "INICIO",
+                      style: (TextStyle(fontFamily: 'Inika')),
+                    ),
+                  ],
+                ),
               ),
               Tab(
-                icon: Icon(Icons.workspace_premium_outlined),
-                text: 'Logros',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.book),
+                    Text(
+                      "HISTORIAS",
+                      style: (TextStyle(fontFamily: 'Inika')),
+                    ),
+                  ],
+                ),
               ),
             ])),
         body: const TabBarView(
-          children: <Widget>[
-            // ChallengesPage(), RewardsPage()
-          ],
+          children: <Widget>[CollectionPage(), TalesPage()],
         ),
       ),
     );
