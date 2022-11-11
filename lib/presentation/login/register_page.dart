@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  @override
   Widget build(BuildContext context) {
+    final TextEditingController _pass = TextEditingController();
+    final TextEditingController _confirmPass = TextEditingController();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(245, 245, 252, 1.0),
         body: SingleChildScrollView(
@@ -48,6 +55,7 @@ class RegisterPage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             decoration: box_decoration(),
                             child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               decoration:
                                   input_decoration('Correo Electronico'),
                               validator: (value) {
@@ -66,6 +74,14 @@ class RegisterPage extends StatelessWidget {
                             decoration: box_decoration(),
                             child: TextFormField(
                               decoration: input_decoration('Contraseña'),
+                              controller: _pass,
+                              obscureText: true,
+                              validator: (value) {
+                                return (value != null &&
+                                        value.trim().length >= 5)
+                                    ? null
+                                    : 'La clave debe ser al menos 5 caracteres';
+                              },
                             ),
                           ),
                           SizedBox(height: 17),
@@ -75,6 +91,14 @@ class RegisterPage extends StatelessWidget {
                             child: TextFormField(
                               decoration:
                                   input_decoration('Confirmar contraseña'),
+                              controller: _confirmPass,
+                              obscureText: true,
+                              validator: (value) {
+                                return (value != null &&
+                                        value.trim() == _pass.text.trim())
+                                    ? null
+                                    : 'La contraseña no coincide';
+                              },
                             ),
                           ),
                           SizedBox(height: 27),
@@ -118,7 +142,7 @@ class RegisterPage extends StatelessWidget {
   }
 
   String? name_validator(value) {
-    String patternletters = r'^[a-zA-Z]+$';
+    String patternletters = r'^[a-z A-Z]+$';
     RegExp regExp = new RegExp(patternletters);
     if (value != null && !regExp.hasMatch(value.trim())) {
       return 'Debe contener solo letras';
