@@ -33,3 +33,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Inika-Bold.ttf
         - asset: assets/fonts/Inika-Regular.ttf
+    - family: Inder
+      fonts:
+        - asset: assets/fonts/Inder-Regular.ttf
