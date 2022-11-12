@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:softales/core/router.dart';
 import 'package:softales/presentation/login/login_page.dart';
 import 'package:provider/provider.dart';
-
+import 'package:softales/presentation/profile/update_page.dart';
 import 'core/constants/app_colors.dart';
 import 'presentation/providers/auth_provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
