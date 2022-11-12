@@ -10,6 +10,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController username = TextEditingController();
+    final TextEditingController email = TextEditingController();
     final TextEditingController _pass = TextEditingController();
     final TextEditingController _confirmPass = TextEditingController();
     return Scaffold(
@@ -37,8 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             decoration: box_decoration(),
                             child: TextFormField(
-                              decoration: input_decoration('Nombres'),
-                              validator: name_validator,
+                              controller: username,
+                              decoration: input_decoration('Nombre de usuario'),
+                              validator: UsernameFieldValidator.validate,
                             ),
                           ),
                           SizedBox(height: 17),
@@ -46,26 +49,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             decoration: box_decoration(),
                             child: TextFormField(
-                              decoration: input_decoration('Apellidos'),
-                              validator: name_validator,
-                            ),
-                          ),
-                          SizedBox(height: 17),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            decoration: box_decoration(),
-                            child: TextFormField(
+                              controller: email,
                               keyboardType: TextInputType.emailAddress,
                               decoration:
                                   input_decoration('Correo Electronico'),
-                              validator: (value) {
-                                String pattern =
-                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                RegExp regExp = new RegExp(pattern);
-                                return regExp.hasMatch(value ?? '')
-                                    ? null
-                                    : 'El valor ingresado no es un correo';
-                              },
+                              validator: EmailFieldValidator.validate,
                             ),
                           ),
                           SizedBox(height: 17),
@@ -76,12 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: input_decoration('Contraseña'),
                               controller: _pass,
                               obscureText: true,
-                              validator: (value) {
-                                return (value != null &&
-                                        value.trim().length >= 5)
-                                    ? null
-                                    : 'La clave debe ser al menos 5 caracteres';
-                              },
+                              validator: PasswordFieldValidator.validate,
                             ),
                           ),
                           SizedBox(height: 17),
@@ -107,9 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(23)),
                               color: Colors.green[900],
                               child: Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 65, vertical: 15),
-                                child: Text(
+                                child: const Text(
                                   'Registrarme',
                                   style: TextStyle(
                                       color: Colors.white,
@@ -167,5 +150,41 @@ class _RegisterPageState extends State<RegisterPage> {
         hintText: hinttext,
         hintStyle: TextStyle(
             fontFamily: 'Inder', color: Color.fromRGBO(0, 118, 135, 0.3)));
+  }
+}
+
+class UsernameFieldValidator {
+  static String? validate(value) {
+    String patternletters = r'^[a-z A-Z]+$';
+    RegExp regExp = new RegExp(patternletters);
+    if (value != null && !regExp.hasMatch(value.trim())) {
+      return 'Debe contener solo letras';
+    }
+    if (value != null && value.trim().length < 5) {
+      return 'Debe ser mayor a 5 caracteres';
+    } else if (value != null && value.trim().length > 30) {
+      return 'Debe ser menor a 30 caracteres';
+    } else {
+      return null;
+    }
+  }
+}
+
+class PasswordFieldValidator {
+  static String? validate(value) {
+    return (value != null && value.trim().length >= 5)
+        ? null
+        : 'La clave debe ser al menos 5 caracteres';
+  }
+}
+
+class EmailFieldValidator {
+  static String? validate(value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value ?? '')
+        ? null
+        : 'El valor ingresado no es un correo';
   }
 }
