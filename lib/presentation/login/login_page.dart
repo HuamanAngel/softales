@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/presentation/widgets/custom_appbar.dart';
+import 'package:softales/presentation/login/register_page.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -72,7 +73,14 @@ class LoginPage extends StatelessWidget {
                           ),
                         )
                       ],
-                    ))
+                    )),
+                Builder(builder: (context) => TextButton(onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterPage()),
+                  )
+                }, child: const Text('¿Eres nuevo por aquí? Regístrate'))),
+
               ],
             ),
           )),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softales/presentation/login/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -117,7 +118,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       fontSize: 16),
                                 ),
                               ),
-                              onPressed: () {})
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const LoginPage()));
+                              })
                         ],
                       ),
                     ),

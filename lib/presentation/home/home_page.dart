@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:softales/presentation/home/collection/collection_page.dart';
 import 'package:softales/presentation/tales/tales_page.dart';
+import 'package:softales/presentation/providers/auth_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = context.watch<AuthProvider>();
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -30,7 +33,9 @@ class HomePage extends StatelessWidget {
                   child: Image.asset("assets/images/Logout.png",
                       width: MediaQuery.of(context).size.width * 0.1),
                 ),
-                onTap: () {},
+                onTap: () {
+                  authProvider.logout();
+                },
               ),
             ],
             bottom: TabBar(tabs: <Widget>[

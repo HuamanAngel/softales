@@ -43,14 +43,14 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (context, state, child) {
-          if (!state.isAuthenticated) {
+          if (state.isAuthenticated) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              initialRoute: 'tales_page',
+              initialRoute: 'home_page',
               routes: AppRouter.pages,
             );
           } else {
