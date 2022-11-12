@@ -3,6 +3,7 @@ import 'package:softales/presentation/home/collection/collection_page.dart';
 import 'package:softales/presentation/home/home_page.dart';
 import 'package:softales/presentation/login/login_page.dart';
 import 'package:softales/presentation/tales/tales_page.dart';
+import 'package:softales/presentation/tales/tale_detail.dart';
 
 abstract class AppRouter {
   static Map<String, Widget Function(BuildContext)> pages = {

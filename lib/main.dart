@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:softales/core/router.dart';
 import 'package:softales/presentation/login/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:softales/presentation/providers/search_provider.dart';
 
 import 'core/constants/app_colors.dart';
 import 'presentation/providers/auth_provider.dart';
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider<SearchProvider>(create: (_) => SearchProvider()),
+        ChangeNotifierProvider<FocusedItemProvider>(create: (_) => FocusedItemProvider(),)
         // Provider(create: (_) => UserProvider()),
         // Provider(create: (_) => ChallengeProvider()),
         // Provider(create: (_) => LevelProvider()),
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              initialRoute: 'home_page',
+              initialRoute: 'tales_page',
               routes: AppRouter.pages,
             );
           } else {
