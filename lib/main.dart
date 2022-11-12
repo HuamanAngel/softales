@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              initialRoute: 'home_page',
+              initialRoute: "create_tale",
               routes: AppRouter.pages,
             );
           } else {

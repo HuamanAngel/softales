@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softales/presentation/tales/create_tale.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({super.key});
@@ -18,7 +19,12 @@ class _CollectionPageState extends State<CollectionPage> {
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CreateTale()),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.green.shade300),

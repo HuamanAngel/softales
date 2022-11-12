@@ -3,6 +3,7 @@ import 'package:softales/presentation/home/collection/collection_page.dart';
 import 'package:softales/presentation/home/home_page.dart';
 import 'package:softales/presentation/login/login_page.dart';
 import 'package:softales/presentation/tales/tales_page.dart';
+import 'package:softales/presentation/tales/create_tale.dart';
 
 abstract class AppRouter {
   static Map<String, Widget Function(BuildContext)> pages = {
@@ -10,5 +11,6 @@ abstract class AppRouter {
     "home_page": (BuildContext context) => const HomePage(),
     "tales_page": (BuildContext context) => const TalesPage(),
     "collection_page": (BuildContext context) => const CollectionPage(),
+    "create_tale": (BuildContext context) => const CreateTale(),
   };
 }
