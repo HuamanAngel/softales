@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
-import 'package:softales/presentation/widgets/custom_appbar.dart';
+import 'package:softales/presentation/widgets/appbar.dart';
 import 'package:provider/provider.dart';
 
 
@@ -16,7 +16,7 @@ class UpdateProfilePage extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          appBar: customAppBar(context),
+          // appBar: AppBar_(text: 'Actualizar perfil'),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Column(

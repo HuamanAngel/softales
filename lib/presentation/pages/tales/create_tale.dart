@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:softales/presentation/widgets/custom_appbar.dart';
+// import 'package:softales/presentation/widgets/custom_appbar.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateTale extends StatefulWidget {
@@ -23,7 +23,7 @@ class _CreateTaleState extends State<CreateTale> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          appBar: customAppBar(context),
+          // appBar: customAppBar(context),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Column(
