@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
-import 'package:softales/presentation/widgets/custom_appbar.dart';
-import 'package:softales/presentation/login/register_page.dart';
+import 'package:softales/presentation/signup/signup_page.dart';
 import 'package:provider/provider.dart';
-import './widgets/input.dart';
+import 'package:softales/presentation/widgets/input.dart';
+import 'package:softales/utils/validators.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,32 +16,10 @@ class _LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isPasswordObscure = true;
 
-  // email validator
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingresa tu correo';
-    }
-    String emailPattern = r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$';
-    if (!RegExp(emailPattern).hasMatch(value)) {
-      return 'Por favor ingresa un correo válido';
-    }
-    return null;
-  }
-
-  // password validator
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingresa tu contraseña';
-    }
-    String passwordPattern =
-        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$_\.]).{8,}$';
-    if (!RegExp(passwordPattern).hasMatch(value)) {
-      return 'La contraseña debe tener al menos 8 caracteres,\nuna letra mayúscula, una minúscula, un número\ny uno de los siguientes carácteres especiales:  #\$_.';
-    }
-    return null;
-  }
+  final String? Function(String?) _validateEmail = EmailValidator().validate;
+  final String? Function(String?) _validatePassword =
+      PasswordValidator().validate;
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +77,22 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   child: const Text('Login')),
                             )),
-                        const SizedBox(
-                          height: 80.0,
-                        ),
-                      ]))
+                      ])),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('¿No tienes una cuenta?'),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignupPage()));
+                          },
+                          child: const Text('Regístrate aquí',
+                              style: TextStyle(color: Color(0xFFDD390D))))
+                    ],
+                  )
                 ]))));
   }
 }

@@ -6,7 +6,7 @@ import 'package:softales/main.dart';
 void main() {
   testWidgets('Check rendering', (WidgetTester tester) async {
     // Starting
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const Softales());
     expect(find.text('Vamos a empezar'), findsOneWidget);
     expect(find.text('ACCEDER'), findsOneWidget);
     await tester.tap(find.text('ACCEDER'));

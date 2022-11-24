@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/login/login_page.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _pass = TextEditingController();
@@ -122,7 +122,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const LoginPage()));
+                                        builder: (context) =>
+                                            const LoginPage()));
                               })
                         ],
                       ),

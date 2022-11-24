@@ -64,9 +64,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ])),
-        body: const TabBarView(
-          children: <Widget>[CollectionPage(), TalesPage()],
-        ),
+        body: const Text('Hello World'),
+        // body: const TabBarView(
+        //   children: <Widget>[CollectionPage(), TalesPage()],
+        // ),
       ),
     );
   }

@@ -13,7 +13,7 @@ class Input extends StatefulWidget {
       required this.controller,
       this.focusedBorder,
       this.validator,
-      this.isPassword})
+      this.isPassword = false})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class _InputState extends State<Input> {
   get validator => widget.validator;
   get isPassword => widget.isPassword;
 
-  bool _isPasswordObscure = true;
+  late bool _isPasswordObscure = isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +37,21 @@ class _InputState extends State<Input> {
         child: TextFormField(
           controller: controller,
           validator: validator,
-          obscureText: isPassword ?? false,
+          obscureText: _isPasswordObscure,
           decoration: InputDecoration(
               focusedBorder: focusedBorder,
               hintText: label,
-              suffixIcon: isPassword == true
+              suffixIcon: isPassword!
                   ? IconButton(
-                      icon: const Icon(
-                        Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
+                      icon: _isPasswordObscure
+                          ? const Icon(
+                              Icons.visibility_off,
+                              color: Colors.grey,
+                            )
+                          : const Icon(
+                              Icons.visibility,
+                              color: Colors.grey,
+                            ),
                       onPressed: () {
                         setState(() {
                           _isPasswordObscure = !_isPasswordObscure;
