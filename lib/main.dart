@@ -10,6 +10,8 @@ import 'package:softales/core/constants/app_colors.dart';
 import 'package:softales/core/constants/softales_theme.dart';
 
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
+import 'package:softales/presentation/pages/home/home_page.dart';
+import 'package:softales/presentation/widgets/appbar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,15 +46,6 @@ class Softales extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme,
       title: 'Softales',
-      // home: Consumer<AuthProvider>(
-      //   builder: (context, state, child) {
-      //     if (state.isAuthenticated) {
-      //       return const App();
-      //     } else {
-      //       return const LoginPage();
-      //     }
-      //   },
-      // ),
       home: ChangeNotifierProvider<AuthProvider>(
         create: ((context) => AuthProvider()),
         child: Consumer<AuthProvider>(
@@ -77,26 +70,26 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final List<BottomNavigationBarItem> _items = [
-    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-    const BottomNavigationBarItem(icon: Icon(Icons.create), label: 'Create'),
-    const BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Library'),
-    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-  ];
+  List<BottomNavigationBarItem> items = AppRouter.items;
+  List<AppPage> pages = AppRouter.pages;
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Text('Hola'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: CustomAppBar(
+          text: pages[_currentIndex].title,
+          canGoBack: false,
+        ),
       ),
+      body: pages[_currentIndex].page,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         currentIndex: _currentIndex,
-        items: _items,
+        items: AppRouter.items,
         backgroundColor: Colors.white,
         showSelectedLabels: false,
         showUnselectedLabels: false,

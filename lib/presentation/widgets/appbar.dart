@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AppBar_ extends StatelessWidget {
+class CustomAppBar extends StatelessWidget {
   final String text;
   final bool? canGoBack;
-  const AppBar_({Key? key, required this.text, this.canGoBack = false})
+  const CustomAppBar({Key? key, required this.text, this.canGoBack = false})
       : super(key: key);
 
   @override

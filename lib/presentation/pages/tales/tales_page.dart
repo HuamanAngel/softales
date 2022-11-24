@@ -84,7 +84,7 @@
 
 // class HorizontalList extends StatefulWidget {
 //   const HorizontalList({Key? key}) : super(key: key);
-//
+
 //   @override
 //   State<HorizontalList> createState() => _HorizontalListState();
 // }
