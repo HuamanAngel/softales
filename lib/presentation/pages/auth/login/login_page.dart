@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:softales/presentation/signup/signup_page.dart';
+import 'package:softales/presentation/pages/auth/signup/signup_page.dart';
 import 'package:softales/presentation/widgets/input.dart';
 
 import 'package:provider/provider.dart';

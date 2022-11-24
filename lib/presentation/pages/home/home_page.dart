@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import 'package:softales/presentation/home/collection/collection_page.dart';
-import 'package:softales/presentation/tales/tales_page.dart';
+import 'package:softales/presentation/pages/tales/tales_page.dart';
 
 import 'package:provider/provider.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
