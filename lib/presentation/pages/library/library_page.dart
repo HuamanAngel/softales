@@ -5,9 +5,6 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: const EdgeInsets.symmetric(horizontal: 20),
-      child: Text('Hola'),
-    );
+    return Text('Hola');
   }
 }

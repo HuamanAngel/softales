@@ -10,9 +10,6 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: const EdgeInsets.symmetric(horizontal: 20),
-      child: Text('Hola'),
-    );
+    return Text('Hola');
   }
 }

@@ -78,13 +78,16 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(70),
         child: CustomAppBar(
           text: pages[_currentIndex].title,
           canGoBack: false,
         ),
       ),
-      body: pages[_currentIndex].page,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: pages[_currentIndex].page,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 0,
