@@ -32,3 +32,20 @@ class PasswordValidator {
     return null;
   }
 }
+
+class UsernameValidator {
+  static const String _rule =
+      """El nombre de usuario debe poseer entre 4 y 15 caracteres.
+  Solo puede contener letras, números y guiones bajos.""";
+  static const String _pattern = r'^[a-zA-Z0-9_]{4,15}$';
+  static final RegExp _regExp = RegExp(_pattern);
+  String? validate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Por favor ingrese un nombre de usuario';
+    }
+    if (!_regExp.hasMatch(value)) {
+      return _rule;
+    }
+    return null;
+  }
+}

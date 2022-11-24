@@ -9,7 +9,7 @@ import 'package:softales/core/router.dart';
 import 'package:softales/core/constants/app_colors.dart';
 import 'package:softales/core/constants/softales_theme.dart';
 
-import 'package:softales/presentation/home/home_page.dart';
+import 'package:softales/presentation/main/main.dart';
 import 'package:softales/presentation/login/login_page.dart';
 
 void main() async {
@@ -24,16 +24,15 @@ void main() async {
     ),
   );
   Provider.debugCheckInvalidValueType = null;
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-        ChangeNotifierProvider<SearchProvider>(create: (_) => SearchProvider()),
-        ChangeNotifierProvider<FocusedItemProvider>(create: (_) => FocusedItemProvider()),
-      ],
-      child: const Softales(),
-    )
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+      ChangeNotifierProvider<SearchProvider>(create: (_) => SearchProvider()),
+      ChangeNotifierProvider<FocusedItemProvider>(
+          create: (_) => FocusedItemProvider()),
+    ],
+    child: const Softales(),
+  ));
 }
 
 class Softales extends StatelessWidget {
@@ -74,14 +73,14 @@ class Softales extends StatelessWidget {
       theme: theme,
       title: 'Softales',
       home: Consumer<AuthProvider>(
-          builder: (context, state, child) {
-            if (state.isAuthenticated) {
-              return const HomePage();
-            } else {
-              return const LoginPage();
-            }
-          },
-        ),
+        builder: (context, state, child) {
+          if (state.isAuthenticated) {
+            return const Main();
+          } else {
+            return const LoginPage();
+          }
+        },
+      ),
     );
   }
 }

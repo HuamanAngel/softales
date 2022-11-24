@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:softales/presentation/providers/auth_provider.dart';
+
 import 'package:softales/presentation/signup/signup_page.dart';
-import 'package:provider/provider.dart';
 import 'package:softales/presentation/widgets/input.dart';
+
+import 'package:provider/provider.dart';
+import 'package:softales/presentation/providers/auth_provider.dart';
+
 import 'package:softales/utils/validators.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,6 +23,16 @@ class _LoginPageState extends State<LoginPage> {
   final String? Function(String?) _validateEmail = EmailValidator().validate;
   final String? Function(String?) _validatePassword =
       PasswordValidator().validate;
+
+  void onLogin() {
+    if (_loginFormKey.currentState!.validate()) {
+      context.read<AuthProvider>().login();
+    }
+  }
+
+  final InputBorder _focusedBorder = const UnderlineInputBorder(
+    borderSide: BorderSide(color: Color(0xFFDD390D)),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                             label: 'Email',
                             controller: _emailController,
                             validator: _validateEmail,
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFDD390D)),
-                            )),
+                            focusedBorder: _focusedBorder),
                         const SizedBox(
                           height: 12.0,
                         ),
@@ -54,9 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                             label: 'Contraseña',
                             controller: _passwordController,
                             validator: _validatePassword,
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFDD390D)),
-                            ),
+                            focusedBorder: _focusedBorder,
                             isPassword: true),
                         const SizedBox(
                           height: 24.0,
@@ -66,16 +75,11 @@ class _LoginPageState extends State<LoginPage> {
                             child: SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                  onPressed: () {
-                                    if (_loginFormKey.currentState!
-                                        .validate()) {
-                                      context.read<AuthProvider>().login();
-                                    }
-                                  },
+                                  onPressed: onLogin,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFFDD390D),
                                   ),
-                                  child: const Text('Login')),
+                                  child: const Text('Ingresar')),
                             )),
                       ])),
                   Row(
