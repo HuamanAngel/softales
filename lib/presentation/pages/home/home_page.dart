@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:softales/domain/entities/tale.dart';
+import 'package:softales/presentation/widgets/tale/tale_item.dart';
 
 // import 'package:softales/presentation/pages/tales/tales_page.dart';
 
@@ -79,6 +81,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Hola');
+    return ListView.builder(
+        itemCount: DUMMY_TALES.length,
+        itemBuilder: (ctx, index) {
+          return Container(
+              margin: const EdgeInsets.symmetric(vertical: 15.0),
+              child: GestureDetector(
+                  onTap: () {}, child: TaleItem(tale: DUMMY_TALES[index])));
+        });
   }
 }

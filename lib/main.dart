@@ -11,7 +11,6 @@ import 'package:softales/core/constants/softales_theme.dart';
 
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
 import 'package:softales/presentation/pages/home/home_page.dart';
-import 'package:softales/presentation/widgets/appbar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,26 +65,25 @@ class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
-  List<BottomNavigationBarItem> items = AppRouter.items;
-  List<AppPage> pages = AppRouter.pages;
+  final List<BottomNavigationBarItem> items = AppRouter.items;
+  final List<AppPage> pages = AppRouter.pages;
+  final double _horizontalPadding = 15.0;
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: CustomAppBar(
-          text: pages[_currentIndex].title,
-          canGoBack: false,
-        ),
+      appBar: AppBar(
+        title: Text(pages[_currentIndex].title,
+            style: const TextStyle(color: Colors.black)),
+        titleSpacing: _horizontalPadding,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: _horizontalPadding),
         child: pages[_currentIndex].page,
       ),
       bottomNavigationBar: BottomNavigationBar(

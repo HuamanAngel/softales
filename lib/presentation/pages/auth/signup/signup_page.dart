@@ -26,17 +26,18 @@ class _SignupPageState extends State<SignupPage> {
   final String? Function(String?) _validateUsername =
       UsernameValidator().validate;
   final String? Function(String?) _validatePassword =
-      PasswordValidator().validate;
+      PasswordValidator().validateSignup;
+
+  String? _validateConfirmPassword(String? value) {
+    if (value != _passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
 
   void onSignup() {
     if (_signupFormKey.currentState!.validate()) {
-      if (_passwordController.text == _confirmPasswordController.text) {
-        print('Signup');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Las contraseñas no coinciden'),
-        ));
-      }
+      print('Hello');
     }
   }
 
@@ -50,73 +51,87 @@ class _SignupPageState extends State<SignupPage> {
         body: SafeArea(
             minimum: const EdgeInsets.symmetric(horizontal: 20),
             child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  SizedBox(
-                      height: 72.0,
-                      child: Image.asset(
-                        'assets/images/logo_full.png',
-                        fit: BoxFit.contain,
-                      )),
-                  const SizedBox(height: 40),
-                  Form(
-                      key: _signupFormKey,
-                      child: Column(children: [
-                        Input(
-                            label: 'Email',
-                            controller: _emailController,
-                            validator: _validateEmail,
-                            focusedBorder: _focusedBorder),
-                        Input(
-                          label: 'Username',
-                          controller: _usernameController,
-                          validator: _validateUsername,
-                          focusedBorder: _focusedBorder,
-                        ),
-                        Input(
-                            label: 'Contraseña',
-                            controller: _passwordController,
-                            validator: _validatePassword,
+              child: SingleChildScrollView(
+                  child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.,
+                      children: [
+                    SizedBox(
+                        height: 72.0,
+                        child: Image.asset(
+                          'assets/images/logo_full.png',
+                          fit: BoxFit.contain,
+                        )),
+                    const SizedBox(height: 40),
+                    Form(
+                        key: _signupFormKey,
+                        child: Column(children: [
+                          Input(
+                              label: 'Email',
+                              controller: _emailController,
+                              validator: _validateEmail,
+                              focusedBorder: _focusedBorder),
+                          const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Text(UsernameValidator.rule,
+                                      style: TextStyle(fontSize: 12)))),
+                          Input(
+                            label: 'Username',
+                            controller: _usernameController,
+                            validator: _validateUsername,
                             focusedBorder: _focusedBorder,
-                            isPassword: true),
-                        Input(
-                            label: 'Confirmar contraseña',
-                            controller: _confirmPasswordController,
-                            validator: _validatePassword,
-                            focusedBorder: _focusedBorder,
-                            isPassword: true),
-                        const SizedBox(
-                          height: 24.0,
-                        ),
-                        Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                  onPressed: onSignup,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFFDD390D),
-                                  ),
-                                  child: const Text('Registrar')),
-                            )),
-                      ])),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('¿Ya tienes una cuenta?'),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
-                          },
-                          child: const Text('Ingresa aquí',
-                              style: TextStyle(color: Color(0xFFDD390D))))
-                    ],
-                  )
-                ]))));
+                          ),
+                          const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Text(PasswordValidator.rule,
+                                      style: TextStyle(fontSize: 12)))),
+                          Input(
+                              label: 'Contraseña',
+                              controller: _passwordController,
+                              validator: _validatePassword,
+                              focusedBorder: _focusedBorder,
+                              isPassword: true),
+                          Input(
+                              label: 'Confirmar contraseña',
+                              controller: _confirmPasswordController,
+                              validator: _validateConfirmPassword,
+                              focusedBorder: _focusedBorder,
+                              isPassword: true),
+                          const SizedBox(
+                            height: 24.0,
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                    onPressed: onSignup,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFFDD390D),
+                                    ),
+                                    child: const Text('Registrar')),
+                              )),
+                        ])),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('¿Ya tienes una cuenta?'),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginPage()));
+                            },
+                            child: const Text('Ingresa aquí',
+                                style: TextStyle(color: Color(0xFFDD390D))))
+                      ],
+                    )
+                  ])),
+            )));
   }
 
   // @override

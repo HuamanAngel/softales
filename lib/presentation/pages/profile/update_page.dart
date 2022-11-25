@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
-import 'package:softales/presentation/widgets/appbar.dart';
 import 'package:provider/provider.dart';
 
 

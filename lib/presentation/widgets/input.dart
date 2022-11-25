@@ -33,14 +33,15 @@ class _InputState extends State<Input> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: TextFormField(
           controller: controller,
           validator: validator,
           obscureText: _isPasswordObscure,
           decoration: InputDecoration(
               focusedBorder: focusedBorder,
-              hintText: label,
+              labelText: label,
+              labelStyle: const TextStyle(color: Colors.grey),
               suffixIcon: isPassword!
                   ? IconButton(
                       icon: _isPasswordObscure
