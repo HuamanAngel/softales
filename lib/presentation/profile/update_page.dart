@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
-import 'package:softales/presentation/widgets/custom_appbar.dart';
+// import 'package:softales/presentation/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
-
 
 class UpdateProfilePage extends StatelessWidget {
   const UpdateProfilePage({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class UpdateProfilePage extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          appBar: customAppBar(context),
+          // appBar: customAppBar(context),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Column(
@@ -91,8 +90,7 @@ class UpdateProfilePage extends StatelessWidget {
                           margin: const EdgeInsets.all(20),
                         ),
                         MaterialButton(
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                           minWidth: 760.0,
                           height: 60.0,
                           color: const Color(0xFF007DBC),
