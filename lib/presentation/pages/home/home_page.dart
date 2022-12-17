@@ -77,6 +77,9 @@ import 'package:softales/presentation/widgets/tale/tale_item.dart';
 // }
 
 class HomePage extends StatelessWidget {
+
+  static const routeName = "home";
+
   const HomePage({Key? key}) : super(key: key);
 
   @override

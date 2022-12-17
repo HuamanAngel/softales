@@ -21,7 +21,7 @@ class Auth {
     if (response.statusCode == 201){
       return 'ok';
     } else {
-      return 'a';
+      return 'error';
     }
   }
 
@@ -38,7 +38,7 @@ class Auth {
       }),
     );
     if (response.statusCode == 400){
-      return 'a';
+      return 'error';
     } else {
       Usuario usr = Usuario.fromJson(jsonDecode(response.body));
       return usr.gUid;

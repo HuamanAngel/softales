@@ -9,6 +9,9 @@ import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/utils/validators.dart';
 
 class SignupPage extends StatefulWidget {
+
+  static const routeName = "register";
+
   const SignupPage({super.key});
 
   @override
