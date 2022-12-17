@@ -34,7 +34,7 @@ class AppRouter {
   static final List<AppPage> pages = [
     AppPage('Inicio', const HomePage(), Icons.home),
     AppPage('Buscar', const SearchPage(), Icons.search),
-    AppPage('Crear', const CreatePage(), Icons.create),
+    AppPage('Crear', CreatePage(), Icons.create),
     AppPage('Biblioteca', const LibraryPage(), Icons.book),
     AppPage('Perfil', const ProfilePage(), Icons.person),
   ];

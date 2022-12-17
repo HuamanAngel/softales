@@ -4,7 +4,8 @@ class AuthProvider extends ChangeNotifier {
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
 
-  void login() {
+
+  void login() async {
     _isAuthenticated = true;
     notifyListeners();
   }
