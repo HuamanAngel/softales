@@ -2,22 +2,43 @@ class Tale {
   final String id;
   final String title;
   final String? description;
-  final String? coverImageUrl;
+  final String coverImageUrl;
   final DateTime createdAt;
   final DateTime lastUpdatedAt;
   final String authorId;
-  final List<String>? tags;
+  final String category;
 
   Tale({
     required this.id,
     required this.title,
     this.description = '',
-    this.coverImageUrl = '',
+    required this.coverImageUrl,
     required this.createdAt,
     required this.lastUpdatedAt,
     required this.authorId,
-    this.tags = const [],
+    this.category = '',
   });
+
+  Tale.fromJson(Map<String, dynamic> json)
+      : id = json['id'].toString(),
+        title = json['col_titl'],
+        description = json['col_desc'],
+        coverImageUrl = json['col_fron_img'] ?? '',
+        createdAt = DateTime.parse(json['created_at']),
+        lastUpdatedAt = DateTime.parse(json['updated_at']),
+        authorId = json['user_id'],
+        category = json['col_cate'];
+
+  Map<String, dynamic> toJson() => {
+        'id': int.parse(id),
+        'col_titl': title,
+        'col_desc': description,
+        'col_fon_img': coverImageUrl,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': lastUpdatedAt.toIso8601String(),
+        'user_id': authorId,
+        'col_cate': category,
+      };
 }
 
 List<Tale> DUMMY_TALES = [
@@ -29,17 +50,16 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '2',
     title: 'Tale 2',
-    description: 'LoremIpsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc',
+    description:
+        'LoremIpsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc',
     coverImageUrl: 'https://picsum.photos/200/300',
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '3',
@@ -49,7 +69,6 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '4',
@@ -59,7 +78,6 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '5',
@@ -69,7 +87,6 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '6',
@@ -79,7 +96,6 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
   Tale(
     id: '7',
@@ -89,6 +105,5 @@ List<Tale> DUMMY_TALES = [
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
     authorId: '1',
-    tags: ['1', '2'],
   ),
 ];
