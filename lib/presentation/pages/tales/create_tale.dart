@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class CreateTale extends StatefulWidget {
   const CreateTale({super.key});
@@ -16,10 +18,16 @@ const List<String> colecciones = <String>[
 ];
 
 class _CreateTaleState extends State<CreateTale> {
-  String dropDownValue = colecciones.first;
-  File? file;
-  File? file2;
-  ImagePicker image = ImagePicker();
+  // String dropDownValue = colecciones.first;
+  // File? file;
+  // File? file2;
+  // ImagePicker image = ImagePicker();
+
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  Future<Tale>? _futureTale;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,172 +41,195 @@ class _CreateTaleState extends State<CreateTale> {
           ),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(height: 20),
-                      const Text("Si ya tienes una colección, selecciona una",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Inika')),
-                      const SizedBox(height: 20),
-                      Container(
-                          height: 50,
-                          width: 370,
-                          color: Colors.white,
-                          padding: const EdgeInsets.all(10),
-                          child: DropdownButton<String>(
-                            value: dropDownValue,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            onChanged: (String? value) {
-                              setState(() {
-                                dropDownValue = value!;
-                              });
-                            },
-                            items: colecciones
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          )),
-                      const SizedBox(height: 20),
-                      const Text("Datos de la Colección",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Inika')),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 180,
-                        width: 360,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: file == null
-                            ? const Icon(Icons.image, size: 40)
-                            : Image.file(file!, fit: BoxFit.fill),
-                      ),
-                      const SizedBox(height: 20),
-                      MaterialButton(
-                        onPressed: () {
-                          getGalleryImageBanner();
-                        },
-                        color: Colors.blue.shade100,
-                        padding: const EdgeInsets.all(15),
-                        child: const Text('Insertar Imagen del Banner'),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 50,
-                        width: 370,
-                        color: Colors.white,
-                        child: const TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            labelText: 'Insertar Título',
-                            contentPadding: EdgeInsets.all(10),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 300,
-                        width: 360,
-                        color: Colors.white,
-                        child: const TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Insertar Descripción',
-                              contentPadding: EdgeInsets.all(10)),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 50,
-                        width: 370,
-                        color: Colors.white,
-                        child: const TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            labelText: 'Insertar Categorías separadas por coma',
-                            contentPadding: EdgeInsets.all(10),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 180,
-                        width: 160,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: file2 == null
-                            ? const Icon(Icons.image, size: 40)
-                            : Image.file(file2!, fit: BoxFit.fill),
-                      ),
-                      const SizedBox(height: 20),
-                      MaterialButton(
-                        onPressed: () {
-                          getGalleryImageProfile();
-                        },
-                        color: Colors.blue.shade100,
-                        padding: const EdgeInsets.all(15),
-                        child: const Text('Insertar Imagen de Portada'),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 40,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.green.shade100,
-                        ),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Crear',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Inika',
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+            child: (_futureTale == null) ? _buildForm() : _buildFutureBuilder(),
           ),
         ));
   }
 
-  getGalleryImageBanner() async {
-    var img = await image.getImage(source: ImageSource.gallery);
-    setState(() {
-      file = File(img!.path);
-    });
+  Column _buildForm() {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 20),
+              const Text("Datos de la Historia",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Inika')),
+              const SizedBox(height: 20),
+              Container(
+                height: 50,
+                width: 370,
+                color: Colors.white,
+                child: TextField(
+                  controller: _controller1,
+                  textAlign: TextAlign.start,
+                  decoration: const InputDecoration(
+                    labelText: 'Insertar Título',
+                    contentPadding: EdgeInsets.all(10),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 300,
+                width: 360,
+                color: Colors.white,
+                child: TextField(
+                  controller: _controller2,
+                  textAlign: TextAlign.start,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      labelText: 'Insertar Descripción',
+                      contentPadding: EdgeInsets.all(10)),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 500,
+                width: 360,
+                color: Colors.white,
+                child: TextField(
+                  controller: _controller3,
+                  textAlign: TextAlign.start,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      labelText: 'Redactar contenido de la Historia',
+                      contentPadding: EdgeInsets.all(10)),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 40,
+                width: 120,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.green.shade100,
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _futureTale = createTale(
+                          _controller1.text,
+                          _controller2.text,
+                          _controller3.text,
+                          'Mario Vargas Llosa');
+                    });
+                  },
+                  child: const Text(
+                    'Crear',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Inika',
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 
-  getGalleryImageProfile() async {
-    var img2 = await image.getImage(source: ImageSource.gallery);
-    setState(() {
-      file2 = File(img2!.path);
-    });
+  FutureBuilder<Tale> _buildFutureBuilder() {
+    return FutureBuilder<Tale>(
+      future: _futureTale,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.title);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
+  // getGalleryImageBanner() async {
+  //   var img = await image.getImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     file = File(img!.path);
+  //   });
+  // }
+
+  // getGalleryImageProfile() async {
+  //   var img2 = await image.getImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     file2 = File(img2!.path);
+  //   });
+  // }
+}
+
+class Tale {
+  final int id;
+  final String title;
+  final String description;
+  final String content;
+  final String colection;
+
+  const Tale({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.content,
+    required this.colection,
+  });
+
+  factory Tale.fromJson(Map<String, dynamic> json) {
+    return Tale(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      content: json['content'],
+      colection: json['colection'],
+    );
+  }
+}
+
+Future<Tale> createTale(
+    String title, String description, String content, String colection) async {
+  // return http.post(
+  //   Uri.parse('http://34.176.95.67/api/tale'),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json; charset=UTF-8',
+  //   },
+  //   body: jsonEncode(<String, String>{
+  //     'title': tale.title,
+  //     'description': tale.description,
+  //     'content': tale.content,
+  //   }),
+  // );
+  final response = await http.post(
+    Uri.parse('http://34.176.95.67/api/tale'),
+    headers: <String, String>{
+      'Authorization':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwLjdnZjZmNmUwZGRhNDQiLCJuYW1lIjoic2FudG9zIiwiaWF0IjoxNjcxODY2NjA5LCJleHAiOjE2NzI0NzE0MDl9.5aFbjtkeqZzqzU4u0nFtYG_V1xRnFMjQPtKSD-PoV5A',
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'title': title,
+      'description': description,
+      'content': content,
+      'col_id': colection,
+    }),
+  );
+
+  if (response.statusCode == 201) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return Tale.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Error al crear la Historia.');
   }
 }
