@@ -17,3 +17,10 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## To create APK
+
+Para crear el APK del aplicativo desarrollado 'Softales', si estamos trabajando en VSCode haremos lo siguiente:
+
+- Abrir la carpeta donde se encuentra ubicado el proyecto en VSCode
+
+- Dirigirse a la Terminal o presionar Ctrl + ñ y escribir el siguiente comando
+  **flutter build apk --build-name=1.0 --build-number=1**
