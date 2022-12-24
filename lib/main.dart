@@ -54,7 +54,7 @@ class Softales extends StatelessWidget {
             if (state.isAuthenticated) {
               return const App();
             } else {
-              return const CreateTale();
+              return const App();
             }
           },
         ),

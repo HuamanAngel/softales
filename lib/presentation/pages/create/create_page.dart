@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreatePage extends StatefulWidget {
-
   const CreatePage({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +10,6 @@ class CreatePage extends StatefulWidget {
 }
 
 class _CreateState extends State<CreatePage> {
-
   XFile? image;
 
   final ImagePicker picker = ImagePicker();
@@ -32,7 +30,7 @@ class _CreateState extends State<CreatePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             title: Text('Insertar imagen de Banner'),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
@@ -81,22 +79,22 @@ class _CreateState extends State<CreatePage> {
             //if image null show text
             image != null
                 ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(
-                  //to show image, you type like this.
-                  File(image!.path),
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: 300,
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        //to show image, you type like this.
+                        File(image!.path),
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width,
+                        height: 300,
+                      ),
+                    ),
+                  )
                 : Text(
-              "No Image",
-              style: TextStyle(fontSize: 20),
-            )
+                    "No Image",
+                    style: TextStyle(fontSize: 20),
+                  )
           ],
         ),
       ),
