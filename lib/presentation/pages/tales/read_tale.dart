@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:softales/domain/entities/tale.dart';
 
 class ReadTale extends StatelessWidget {
-  final String content;
-  const ReadTale({Key? key, required this.content}) : super(key: key);
+  final Tale tale;
+  const ReadTale({Key? key, required this.tale}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: Center(child: Text(content)));
+    return Scaffold(
+        appBar: AppBar(
+            title: SizedBox(
+                child: Text(tale.title,
+                    style: const TextStyle(
+                      color: Colors.black,
+                    )))),
+        body: Center(child: Text(tale.content)));
   }
 }
