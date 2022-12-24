@@ -1,16 +1,20 @@
-# softales
+# Softales
 
-A new Flutter project.
+Proyecto del curso de "Tendencias de arquitectura de software"
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```dart
+git clone https://github.com/HuamanAngel/softales.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Backend
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Para acceder al backend del presente ir al siguiente repositorio:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Ir al Backend](https://github.com/HuamanAngel/softales_backend)
+
+
+
+
