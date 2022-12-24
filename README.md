@@ -1,16 +1,31 @@
-# softales
+# Softales
 
-A new Flutter project.
+Proyecto del curso de "Tendencias de arquitectura de software"
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```dart
+git clone https://github.com/HuamanAngel/softales.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Backend
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Para acceder al backend del presente ir al siguiente repositorio:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Ir al Backend](https://github.com/HuamanAngel/softales_backend)
+
+## Para generar el APK
+
+Para crear el APK del aplicativo desarrollado 'Softales', si estamos trabajando en VSCode haremos lo siguiente:
+
+- Abrir la carpeta donde se encuentra ubicado el proyecto en VSCode
+
+- Dirigirse a la Terminal o presionar Ctrl + ñ y escribir el siguiente comando
+ 
+    __flutter build apk --build-name=1.0 --build-number=1__
+
+- Posteriormente nos debe salir que se construyó el apk correctamente, así como la carpeta en donde está ubicado.
+
+
+

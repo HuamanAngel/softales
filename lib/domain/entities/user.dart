@@ -1,10 +1,13 @@
 class User {
+  final String id;
   final String email;
-  final String name;
-  final int level;
+  final String username;
+  final String? profileImageUrl;
+
   User({
+    required this.id,
     required this.email,
-    required this.name,
-    required this.level,
+    required this.username,
+    this.profileImageUrl = '',
   });
 }
