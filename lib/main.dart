@@ -12,6 +12,8 @@ import 'package:softales/core/constants/softales_theme.dart';
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
 import 'package:softales/presentation/pages/home/home_page.dart';
 
+import 'package:softales/presentation/pages/tales/create_tale.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
@@ -52,7 +54,7 @@ class Softales extends StatelessWidget {
             if (state.isAuthenticated) {
               return const App();
             } else {
-              return const LoginPage();
+              return const CreateTale();
             }
           },
         ),

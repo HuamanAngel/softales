@@ -9,7 +9,14 @@ class CreateTale extends StatefulWidget {
   State<CreateTale> createState() => _CreateTaleState();
 }
 
+const List<String> colecciones = <String>[
+  'Colección A',
+  'Colección B',
+  'Colección C'
+];
+
 class _CreateTaleState extends State<CreateTale> {
+  String dropDownValue = colecciones.first;
   File? file;
   File? file2;
   ImagePicker image = ImagePicker();
@@ -41,31 +48,26 @@ class _CreateTaleState extends State<CreateTale> {
                               fontFamily: 'Inika')),
                       const SizedBox(height: 20),
                       Container(
-                        height: 50,
-                        width: 370,
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(10),
-                        child: DropdownButton(
-                          hint: const Text("Selecciona una Colección"),
-                          items: const [
-                            DropdownMenuItem(
-                              value: 1,
-                              child: Text("Colección A"),
-                            ),
-                            DropdownMenuItem(
-                              value: 2,
-                              child: Text("Colección B"),
-                            ),
-                            DropdownMenuItem(
-                              value: 3,
-                              child: Text("Colección C"),
-                            ),
-                          ],
-                          onChanged: (value) {
-                            setState(() {});
-                          },
-                        ),
-                      ),
+                          height: 50,
+                          width: 370,
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(10),
+                          child: DropdownButton<String>(
+                            value: dropDownValue,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            onChanged: (String? value) {
+                              setState(() {
+                                dropDownValue = value!;
+                              });
+                            },
+                            items: colecciones
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
                       const SizedBox(height: 20),
                       const Text("Datos de la Colección",
                           textAlign: TextAlign.left,
@@ -155,6 +157,27 @@ class _CreateTaleState extends State<CreateTale> {
                         color: Colors.blue.shade100,
                         padding: const EdgeInsets.all(15),
                         child: const Text('Insertar Imagen de Portada'),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        height: 40,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green.shade100,
+                        ),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Crear',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Inika',
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
