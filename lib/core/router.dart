@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:softales/presentation/pages/home/home_page.dart';
 import 'package:softales/presentation/pages/profile/profile_page.dart';
 import 'package:softales/presentation/pages/search/search_page.dart';
@@ -33,7 +33,7 @@ class AppRouter {
   static final List<AppPage> pages = [
     AppPage('Inicio', const HomePage(), Icons.home),
     AppPage('Buscar', const SearchPage(), Icons.search),
-    AppPage('Crear', const CreatePage(), Icons.create),
+    AppPage('Crear', const CreateTale(), Icons.create),
     AppPage('Biblioteca', const LibraryPage(), Icons.book),
     AppPage('Perfil', const ProfilePage(), Icons.person),
   ];

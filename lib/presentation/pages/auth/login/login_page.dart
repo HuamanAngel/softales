@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softales/http/Auth.dart';
 
 import 'package:softales/presentation/pages/auth/signup/signup_page.dart';
 import 'package:softales/presentation/widgets/input.dart';
@@ -24,10 +25,19 @@ class _LoginPageState extends State<LoginPage> {
   final String? Function(String?) _validatePassword =
       PasswordValidator().validate;
 
-  void onLogin() {
-    if (_loginFormKey.currentState!.validate()) {
+  void onLogin() async {
+    //print(_emailController.text);
+    //print(_passwordController.text);
+
+    final auth = Auth();
+    var data = await auth.ingresar(_emailController.text, _passwordController.text);
+    //print(data);
+
+    if (_loginFormKey.currentState!.validate() && data != 'a') {
       context.read<AuthProvider>().login();
     }
+
+
   }
 
   final InputBorder _focusedBorder = const UnderlineInputBorder(
