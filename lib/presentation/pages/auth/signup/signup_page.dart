@@ -50,7 +50,8 @@ class _SignupPageState extends State<SignupPage> {
 
     if (_signupFormKey.currentState!.validate() && data != 'error') {
       print('Hello');
-      Navigator.pushNamed(context, LoginPage.routeName);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     }
   }
 

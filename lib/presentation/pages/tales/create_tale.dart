@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:softales/presentation/providers/auth_provider.dart';
 
 class CreateTale extends StatefulWidget {
   const CreateTale({super.key});
@@ -108,11 +109,8 @@ class _CreateTaleState extends State<CreateTale> {
                 child: TextButton(
                   onPressed: () {
                     setState(() {
-                      _futureTale = createTale(
-                          _controller1.text,
-                          _controller2.text,
-                          _controller3.text,
-                          'Mario Vargas Llosa');
+                      _futureTale = createTale(_controller1.text,
+                          _controller2.text, _controller3.text);
                     });
                   },
                   child: const Text(
@@ -168,14 +166,14 @@ class Tale {
   final String title;
   final String description;
   final String content;
-  final String colection;
+  // final String colection;
 
   const Tale({
     required this.id,
     required this.title,
     required this.description,
     required this.content,
-    required this.colection,
+    // required this.colection,
   });
 
   factory Tale.fromJson(Map<String, dynamic> json) {
@@ -184,13 +182,13 @@ class Tale {
       title: json['title'],
       description: json['description'],
       content: json['content'],
-      colection: json['colection'],
+      // colection: json['colection'],
     );
   }
 }
 
 Future<Tale> createTale(
-    String title, String description, String content, String colection) async {
+    String title, String description, String content) async {
   // return http.post(
   //   Uri.parse('http://34.176.95.67/api/tale'),
   //   headers: <String, String>{
@@ -204,26 +202,22 @@ Future<Tale> createTale(
   // );
   final response = await http.post(
     Uri.parse('http://34.176.95.67/api/tale'),
-    headers: <String, String>{
-      'Authorization':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwLjdnZjZmNmUwZGRhNDQiLCJuYW1lIjoic2FudG9zIiwiaWF0IjoxNjcxODY2NjA5LCJleHAiOjE2NzI0NzE0MDl9.5aFbjtkeqZzqzU4u0nFtYG_V1xRnFMjQPtKSD-PoV5A',
+    headers: {
+      HttpHeaders.authorizationHeader:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwLmk1NDFpYWRkMjM3ZGIiLCJuYW1lIjoiVGVzdCIsImlhdCI6MTY3MTg2ODQ3NywiZXhwIjoxNjcyNDczMjc3fQ.7ai9FwkpEa2TAwr8acbjmoxH4Dqiac9L_BKM-lXBsDo',
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
       'title': title,
       'description': description,
       'content': content,
-      'col_id': colection,
+      // 'col_id': colection,
     }),
   );
 
   if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
     return Tale.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
     throw Exception('Error al crear la Historia.');
   }
 }
