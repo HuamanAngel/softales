@@ -42,8 +42,7 @@ class TaleDetail extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ReadTale(content: tale.content)))
+                              builder: (context) => ReadTale(tale: tale)))
                     },
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.blue),
