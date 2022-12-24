@@ -11,7 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = 'http://34.176.95.67/api/collection';
+  static const routeName = "home";
+  final String url = 'http://34.176.95.67/api/tale';
 
   Future<List<Tale>> _getTales() async {
     List<Tale> tales = [];
@@ -21,34 +22,6 @@ class _HomePageState extends State<HomePage> {
       tales.add(tale);
     }
     return tales;
-  }
-
-  // void fetchTales() async {
-  //   var url = 'http://34.176.95.67/api/collection';
-  //   try {
-  //     Response response = await Dio().get(url);
-  //     List<Tale> responseFormatted = response.data[0]
-  //         .map<Widget>((e) => Tale(
-  //               id: e['id'].toString(),
-  //               title: e['col_titl'],
-  //               description: e['col_desc'],
-  //               coverImageUrl: e['col_fron_img'],
-  //               category: e['col_cate'],
-  //               authorId: e['user_id'],
-  //               createdAt: DateTime.parse(e['created_at']),
-  //               lastUpdatedAt: DateTime.parse(e['updated_at']),
-  //             ))
-  //         .toList();
-  //     tales = responseFormatted;
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-    // fetchTales();
   }
 
   @override

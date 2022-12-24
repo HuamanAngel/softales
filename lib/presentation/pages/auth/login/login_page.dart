@@ -10,7 +10,6 @@ import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/utils/validators.dart';
 
 class LoginPage extends StatefulWidget {
-
   static const routeName = "login";
 
   const LoginPage({Key? key}) : super(key: key);
@@ -33,14 +32,19 @@ class _LoginPageState extends State<LoginPage> {
     //print(_passwordController.text);
 
     final auth = Auth();
-    var data = await auth.ingresar(_emailController.text, _passwordController.text);
+    var data =
+        await auth.ingresar(_emailController.text, _passwordController.text);
     //print(data);
 
     if (_loginFormKey.currentState!.validate() && data != 'error') {
       context.read<AuthProvider>().login();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al iniciar sesión'),
+        ),
+      );
     }
-
-
   }
 
   final InputBorder _focusedBorder = const UnderlineInputBorder(

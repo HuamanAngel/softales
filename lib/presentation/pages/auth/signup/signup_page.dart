@@ -10,7 +10,6 @@ import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/utils/validators.dart';
 
 class SignupPage extends StatefulWidget {
-
   static const routeName = "register";
 
   const SignupPage({super.key});
@@ -40,17 +39,18 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void onSignup() async {
-
     final auth = Auth();
 
     var data = "error";
-    if(_confirmPasswordController.text == _passwordController.text) {
-      data = await auth.registrar(_usernameController.text, _emailController.text, _passwordController.text);
+    if (_confirmPasswordController.text == _passwordController.text) {
+      data = await auth.registrar(_usernameController.text,
+          _emailController.text, _passwordController.text);
     }
     //print(data);
 
     if (_signupFormKey.currentState!.validate() && data != 'error') {
       print('Hello');
+      Navigator.pushNamed(context, LoginPage.routeName);
     }
   }
 
