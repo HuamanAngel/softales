@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:softales/domain/entities/tale.dart';
 import 'package:softales/presentation/widgets/tale/tale_cover.dart';
 import 'package:softales/utils/date.dart';
+import 'package:softales/presentation/pages/tales/read_tale.dart';
 
 class TaleDetail extends StatelessWidget {
   final Tale tale;
@@ -37,7 +38,13 @@ class TaleDetail extends StatelessWidget {
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ReadTale(content: tale.content)))
+                    },
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                     child: const Text("Leer"),
