@@ -30,13 +30,9 @@ class _LoginPageState extends State<LoginPage> {
       PasswordValidator().validate;
 
   void onLogin() async {
-    //print(_emailController.text);
-    //print(_passwordController.text);
-
     final auth = Auth();
     var data =
         await auth.ingresar(_emailController.text, _passwordController.text);
-    //print(data);
 
     if (_loginFormKey.currentState!.validate() && data != 'error') {
       context.read<AuthProvider>().login(jsonDecode(data));
@@ -94,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                  key: Key('btn-ingresar'),
+                                  key: Key('login'),
                                   onPressed: onLogin,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFFDD390D),

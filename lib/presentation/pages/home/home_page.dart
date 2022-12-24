@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       Tale tale = Tale.fromJson(e);
       tales.add(tale);
     }
-    return tales;
+    return tales.reversed.toList();
   }
 
   @override

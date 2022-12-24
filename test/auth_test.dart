@@ -66,7 +66,7 @@ void main() {
       ));
     }
 
-    testWidgets('Bonton no registro - existe y redirección',
+    testWidgets('Boton no registro - existe y redirección',
         (WidgetTester tester) async {
       await _buildLogoutPage(tester);
       final btnLogin = find.byKey(const ValueKey("btn-no-cuenta"));

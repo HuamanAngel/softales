@@ -35,6 +35,7 @@ class _InputState extends State<Input> {
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: TextFormField(
+          key: Key(label.toLowerCase()),
           controller: controller,
           validator: validator,
           obscureText: _isPasswordObscure,
