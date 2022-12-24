@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const routeName = "home";
   final String url = 'http://34.176.95.67/api/tale';
 
   Future<List<Tale>> _getTales() async {

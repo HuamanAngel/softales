@@ -2,7 +2,7 @@ class Tale {
   final String id;
   final String title;
   final String? description;
-  final String? coverImageUrl;
+  final String coverImageUrl;
   final DateTime createdAt;
   final DateTime lastUpdatedAt;
   final String authorId;
@@ -12,7 +12,7 @@ class Tale {
     required this.id,
     required this.title,
     this.description = '',
-    this.coverImageUrl = '',
+    required this.coverImageUrl,
     required this.createdAt,
     required this.lastUpdatedAt,
     required this.authorId,
