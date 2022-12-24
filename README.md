@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Creación del APK
+
+Para crear el APK del aplicativo desarrollado 'Softales', si estamos trabajando en VSCode haremos lo siguiente:
+
+- Abrir la carpeta donde se encuentra ubicado el proyecto en VSCode
+
+- Dirigirse a la Terminal o presionar Ctrl + ñ y escribir el siguiente comando
+ 
+    __flutter build apk --build-name=1.0 --build-number=1__
+
+- Posteriormente nos debe salir que se construyó el apk correctamente, así como la carpeta en donde está ubicada el APK
