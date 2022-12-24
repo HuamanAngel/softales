@@ -13,9 +13,9 @@ class TaleItem extends StatelessWidget {
         height: 200,
         child: Row(children: [
           SizedBox(
-            width: 128,
-              child: TaleCover(
-                  url: tale.coverImageUrl!, fallbackText: tale.title)),
+              width: 128,
+              child:
+                  TaleCover(url: tale.coverImageUrl, fallbackText: tale.title)),
           Expanded(
               child: Padding(
                   padding: const EdgeInsets.all(8.0),

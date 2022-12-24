@@ -2,93 +2,41 @@ class Tale {
   final String id;
   final String title;
   final String? description;
-  final String? coverImageUrl;
+  final String coverImageUrl;
   final DateTime createdAt;
   final DateTime lastUpdatedAt;
   final String authorId;
-  final List<String>? tags;
+  final String content;
 
   Tale({
     required this.id,
     required this.title,
     this.description = '',
-    this.coverImageUrl = '',
+    required this.coverImageUrl,
     required this.createdAt,
     required this.lastUpdatedAt,
     required this.authorId,
-    this.tags = const [],
+    required this.content,
   });
-}
 
-List<Tale> DUMMY_TALES = [
-  Tale(
-    id: '1',
-    title: 'Tale 1',
-    description: 'Tale 1 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '2',
-    title: 'Tale 2',
-    description: 'LoremIpsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc. Donec auctor, nisl eget aliquam tincidunt, nunc',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '3',
-    title: 'Tale 3',
-    description: 'Tale 3 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '4',
-    title: 'Tale 4',
-    description: 'Tale 4 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '5',
-    title: 'Tale 5',
-    description: 'Tale 5 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '6',
-    title: 'Tale 6',
-    description: 'Tale 6 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-  Tale(
-    id: '7',
-    title: 'Tale 7',
-    description: 'Tale 7 description',
-    coverImageUrl: 'https://picsum.photos/200/300',
-    createdAt: DateTime.now(),
-    lastUpdatedAt: DateTime.now(),
-    authorId: '1',
-    tags: ['1', '2'],
-  ),
-];
+  Tale.fromJson(Map<String, dynamic> json)
+      : id = json['id'].toString(),
+        title = json['tal_titl'],
+        description = json['tal_desc'],
+        coverImageUrl = json['tal_fron_img'] ?? '',
+        createdAt = DateTime.parse(json['created_at']),
+        lastUpdatedAt = DateTime.parse(json['updated_at']),
+        authorId = json['col_id'],
+        content = json['tal_cont'];
+
+  Map<String, dynamic> toJson() => {
+        'id': int.parse(id),
+        'tal_titl': title,
+        'tal_desc': description,
+        'tal_fron_img': coverImageUrl,
+        'tal_cont': content,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': lastUpdatedAt.toIso8601String(),
+        'col_id': authorId,
+      };
+}

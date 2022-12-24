@@ -11,12 +11,6 @@ class CreateTale extends StatefulWidget {
   State<CreateTale> createState() => _CreateTaleState();
 }
 
-const List<String> colecciones = <String>[
-  'Colección A',
-  'Colección B',
-  'Colección C'
-];
-
 class _CreateTaleState extends State<CreateTale> {
   // String dropDownValue = colecciones.first;
   // File? file;

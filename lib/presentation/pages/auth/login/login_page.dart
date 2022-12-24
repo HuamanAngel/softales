@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:softales/http/Auth.dart';
 
@@ -10,6 +12,8 @@ import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/utils/validators.dart';
 
 class LoginPage extends StatefulWidget {
+  static const routeName = "login";
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -30,14 +34,19 @@ class _LoginPageState extends State<LoginPage> {
     //print(_passwordController.text);
 
     final auth = Auth();
-    var data = await auth.ingresar(_emailController.text, _passwordController.text);
+    var data =
+        await auth.ingresar(_emailController.text, _passwordController.text);
     //print(data);
 
-    if (_loginFormKey.currentState!.validate() && data != 'a') {
-      context.read<AuthProvider>().login();
+    if (_loginFormKey.currentState!.validate() && data != 'error') {
+      context.read<AuthProvider>().login(jsonDecode(data));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al iniciar sesión'),
+        ),
+      );
     }
-
-
   }
 
   final InputBorder _focusedBorder = const UnderlineInputBorder(
@@ -85,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
+                                  key: Key('btn-ingresar'),
                                   onPressed: onLogin,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFFDD390D),
@@ -97,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       const Text('¿No tienes una cuenta?'),
                       TextButton(
+                          key: Key('btn-no-cuenta'),
                           onPressed: () {
                             Navigator.push(
                                 context,
