@@ -7,34 +7,32 @@ import 'package:softales/presentation/pages/auth/login/login_page.dart';
 import 'package:softales/presentation/pages/auth/signup/signup_page.dart';
 import 'package:softales/presentation/pages/home/home_page.dart';
 
-
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
-
   // Pruebas de peticiones al servidor
 
-  test("Peticion Login", () async{
+  test("Peticion Login", () async {
     Auth auth = new Auth();
     var resp = await auth.ingresar("prueba2@gmail.com", '123bnvBNV_');
 
     expect(resp, '0.7gf6f6e0dda44');
   });
 
-  test("Peticion Login - contraceña incorrecta", () async{
+  test("Peticion Login - contraceña incorrecta", () async {
     Auth auth = new Auth();
     var resp = await auth.ingresar("prueba2@gmail.com", '12345bnvBNV_');
 
     expect(resp == 'error', true);
   });
 
-  test("Peticion Registro existente", () async{
+  test("Peticion Registro existente", () async {
     Auth auth = new Auth();
-    var resp = await auth.registrar("santos2", "mandarina2@gmail.com", "santoschocano");
+    var resp = await auth.registrar(
+        "santos2", "mandarina2@gmail.com", "santoschocano");
 
     expect(resp, 'error');
   });
-
 
   // Pruebas de widget
 
@@ -68,8 +66,8 @@ void main() {
       ));
     }
 
-    testWidgets('Bonton no registro - existe y redirección', (WidgetTester tester) async {
-
+    testWidgets('Bonton no registro - existe y redirección',
+        (WidgetTester tester) async {
       await _buildLogoutPage(tester);
       final btnLogin = find.byKey(const ValueKey("btn-no-cuenta"));
 
@@ -78,13 +76,5 @@ void main() {
 
       expect(find.byType(LoginPage), findsOneWidget);
     });
-
   });
-
-
 }
-
-
-
-
-

@@ -4,6 +4,7 @@ import 'package:softales/presentation/widgets/tale/tale_list.dart';
 import 'package:dio/dio.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = "home";
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const routeName = "home";
   final String url = 'http://34.176.95.67/api/tale';
 
   Future<List<Tale>> _getTales() async {

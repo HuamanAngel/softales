@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:softales/http/Auth.dart';
 
@@ -37,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     //print(data);
 
     if (_loginFormKey.currentState!.validate() && data != 'error') {
-      context.read<AuthProvider>().login();
+      context.read<AuthProvider>().login(jsonDecode(data));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -38,7 +38,7 @@ class Auth {
       return 'error';
     } else {
       Usuario usr = Usuario.fromJson(jsonDecode(response.body));
-      return usr.gUid;
+      return response.body;
     }
   }
 }
