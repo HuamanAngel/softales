@@ -18,7 +18,7 @@ void main() {
     Auth auth = new Auth();
     var resp = await auth.ingresar("prueba2@gmail.com", '123bnvBNV_');
 
-    expect(resp, '639d42a98e226a9ec7b0178a');
+    expect(resp, '0.7gf6f6e0dda44');
   });
 
   test("Peticion Login - contraceña incorrecta", () async{
@@ -30,7 +30,7 @@ void main() {
 
   test("Peticion Registro existente", () async{
     Auth auth = new Auth();
-    var resp = await auth.registrar("prueba2@gmail.com", "123bnvBNV_");
+    var resp = await auth.registrar("santos2", "mandarina2@gmail.com", "santoschocano");
 
     expect(resp, 'error');
   });

@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final auth = Auth();
     var data = await auth.ingresar(_emailController.text, _passwordController.text);
-    print(data);
+    //print(data);
 
     if (_loginFormKey.currentState!.validate() && data != 'error') {
       context.read<AuthProvider>().login();
