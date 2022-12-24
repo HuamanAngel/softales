@@ -7,7 +7,6 @@ import 'package:softales/presentation/pages/library/library_page.dart';
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
 import 'package:softales/presentation/pages/auth/signup/signup_page.dart';
 import 'package:softales/presentation/pages/profile/profile_page.dart';
-import 'package:softales/presentation/pages/tales/tales_page.dart';
 import 'package:softales/presentation/pages/tales/create_tale.dart';
 import 'package:softales/presentation/pages/tales/tale_detail.dart';
 import 'package:flutter/material.dart';
