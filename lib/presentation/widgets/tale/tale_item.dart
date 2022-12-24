@@ -13,12 +13,12 @@ class TaleItem extends StatelessWidget {
         height: 200,
         child: Row(children: [
           SizedBox(
-              width: 128,
-              child:
-                  TaleCover(url: tale.coverImageUrl, fallbackText: tale.title)),
+            width: 128,
+              child: TaleCover(
+                  url: tale.coverImageUrl!, fallbackText: tale.title)),
           Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -30,14 +30,8 @@ class TaleItem extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.bold)),
                       ),
-                      const SizedBox(height: 10.0),
-                      SizedBox(
-                        height: 25,
-                        child: Text(tale.authorId),
-                      ),
                       const SizedBox(height: 25.0),
                       SizedBox(
-                        height: 100,
                         child: RichText(
                           text: TextSpan(
                             text: tale.description,

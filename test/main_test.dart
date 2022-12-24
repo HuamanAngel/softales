@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:softales/http/Auth.dart';
 import 'package:softales/main.dart';
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
 

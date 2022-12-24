@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softales/http/Auth.dart';
 
 import 'package:softales/presentation/pages/auth/login/login_page.dart';
 import 'package:softales/presentation/widgets/input.dart';
@@ -9,6 +10,9 @@ import 'package:softales/presentation/providers/auth_provider.dart';
 import 'package:softales/utils/validators.dart';
 
 class SignupPage extends StatefulWidget {
+
+  static const routeName = "register";
+
   const SignupPage({super.key});
 
   @override
@@ -35,8 +39,17 @@ class _SignupPageState extends State<SignupPage> {
     return null;
   }
 
-  void onSignup() {
-    if (_signupFormKey.currentState!.validate()) {
+  void onSignup() async {
+
+    final auth = Auth();
+
+    var data = "error";
+    if(_confirmPasswordController.text == _passwordController.text) {
+      data = await auth.registrar(_usernameController.text, _emailController.text, _passwordController.text);
+    }
+    //print(data);
+
+    if (_signupFormKey.currentState!.validate() && data != 'error') {
       print('Hello');
     }
   }
