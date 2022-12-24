@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:softales/presentation/providers/auth_provider.dart';
 
 class CreateTale extends StatefulWidget {
@@ -17,7 +18,6 @@ class _CreateTaleState extends State<CreateTale> {
   // File? file;
   // File? file2;
   // ImagePicker image = ImagePicker();
-
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
@@ -36,7 +36,7 @@ class _CreateTaleState extends State<CreateTale> {
           ),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
-            child: (_futureTale == null) ? _buildForm() : _buildFutureBuilder(),
+            child: _buildForm(),
           ),
         ));
   }
@@ -108,10 +108,7 @@ class _CreateTaleState extends State<CreateTale> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    setState(() {
-                      _futureTale = createTale(_controller1.text,
-                          _controller2.text, _controller3.text);
-                    });
+                    print('Historia Creada');
                   },
                   child: const Text(
                     'Crear',
@@ -137,6 +134,12 @@ class _CreateTaleState extends State<CreateTale> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Text(snapshot.data!.title);
+        } else if (snapshot.hasData) {
+          return Text(snapshot.data!.description);
+        } else if (snapshot.hasData) {
+          return Text(snapshot.data!.content);
+        } else if (snapshot.hasData) {
+          return Text(snapshot.data!.colection);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
@@ -166,14 +169,14 @@ class Tale {
   final String title;
   final String description;
   final String content;
-  // final String colection;
+  final String colection;
 
   const Tale({
     required this.id,
     required this.title,
     required this.description,
     required this.content,
-    // required this.colection,
+    required this.colection,
   });
 
   factory Tale.fromJson(Map<String, dynamic> json) {
@@ -182,13 +185,13 @@ class Tale {
       title: json['title'],
       description: json['description'],
       content: json['content'],
-      // colection: json['colection'],
+      colection: json['colection'],
     );
   }
 }
 
-Future<Tale> createTale(
-    String title, String description, String content) async {
+Future<Tale> createTale(String title, String description, String content,
+    int colection, String bearer) async {
   // return http.post(
   //   Uri.parse('http://34.176.95.67/api/tale'),
   //   headers: <String, String>{
@@ -202,16 +205,15 @@ Future<Tale> createTale(
   // );
   final response = await http.post(
     Uri.parse('http://34.176.95.67/api/tale'),
-    headers: {
-      HttpHeaders.authorizationHeader:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwLmk1NDFpYWRkMjM3ZGIiLCJuYW1lIjoiVGVzdCIsImlhdCI6MTY3MTg2ODQ3NywiZXhwIjoxNjcyNDczMjc3fQ.7ai9FwkpEa2TAwr8acbjmoxH4Dqiac9L_BKM-lXBsDo',
+    headers: <String, String>{
+      HttpHeaders.authorizationHeader: 'Bearer $bearer',
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
       'title': title,
       'description': description,
       'content': content,
-      // 'col_id': colection,
+      'col_id': colection.toString(),
     }),
   );
 

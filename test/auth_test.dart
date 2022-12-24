@@ -13,21 +13,21 @@ void main() {
   // Pruebas de peticiones al servidor
 
   test("Peticion Login", () async {
-    Auth auth = new Auth();
-    var resp = await auth.ingresar("prueba2@gmail.com", '123bnvBNV_');
+    Auth auth = Auth();
+    var resp = await auth.ingresar("test@test.com", "#ResidentEvil8");
 
     expect(resp, '0.7gf6f6e0dda44');
   });
 
   test("Peticion Login - contraceña incorrecta", () async {
-    Auth auth = new Auth();
-    var resp = await auth.ingresar("prueba2@gmail.com", '12345bnvBNV_');
+    Auth auth = Auth();
+    var resp = await auth.ingresar("test@test.com", '12345bnvBNV_');
 
     expect(resp == 'error', true);
   });
 
   test("Peticion Registro existente", () async {
-    Auth auth = new Auth();
+    Auth auth = Auth();
     var resp = await auth.registrar(
         "santos2", "mandarina2@gmail.com", "santoschocano");
 
